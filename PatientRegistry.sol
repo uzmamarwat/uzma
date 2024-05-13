@@ -10,21 +10,10 @@ contract PatientRegistry {
 
     event PatientRegistered(address indexed patientAddress, string name, string disease);
 
-    function registerPatient(string memory _name, string memory _disease) public {
-        patients[msg.sender] = Patient(_name, _disease);
-        emit PatientRegistered(msg.sender, _name, _disease);
+    function registerPatient() public {
+        string memory name = "Nida Khan";
+        string memory disease = "Flu";
+        patients[msg.sender] = Patient(name, disease);
+        emit PatientRegistered(msg.sender, name, disease);
     }
 }
-
-contract PatientData {
-    PatientRegistry patientRegistry;
-
-    constructor(address _patientRegistryAddress) {
-        patientRegistry = PatientRegistry(_patientRegistryAddress);
-    }
-
-    function addPatientData() public {
-        patientRegistry.registerPatient("Nida Khan", "Flu");
-    }
-}
-
